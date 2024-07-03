@@ -4,7 +4,6 @@ import time
 
 
 def compress_image(input_image_path, output_image_path, quality=85):
-
     with Image.open(input_image_path) as img:
         if img.mode in ('RGBA', 'LA'):
             img = img.convert('RGB')
@@ -13,6 +12,10 @@ def compress_image(input_image_path, output_image_path, quality=85):
 
 
 def compress_images_in_directory(input_directory, output_directory, quality=85):
+    if not os.path.exists(input_directory) or not os.listdir(input_directory):
+        print("La carpeta de entrada está vacía o no existe.")
+        time.sleep(2)
+        return
 
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
@@ -27,7 +30,6 @@ def compress_images_in_directory(input_directory, output_directory, quality=85):
             print(f"Imagen guardada exitosamente en {output_image_path}.")
         except Exception as e:
             print(f"No se pudo comprimir la imagen {input_image_path}: {e}")
-
     time.sleep(2)
 
 
