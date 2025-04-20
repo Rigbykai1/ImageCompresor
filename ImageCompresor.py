@@ -69,4 +69,9 @@ if __name__ == "__main__":
     input_directory = os.path.join(current_directory, "ImagenesPesadas")
     output_directory = os.path.join(current_directory, "ImagenesComprimidas")
 
+    if not os.path.exists(input_directory):
+        os.makedirs(input_directory)
+    if not os.path.exists(output_directory):
+        os.makedirs(output_directory)
+
     compress_images_in_directory(input_directory, output_directory)
