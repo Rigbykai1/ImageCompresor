@@ -8,7 +8,7 @@ def compress_image(input_image_path, output_image_path):
         compress_mode(output_image_path, img)
 
 
-def compress_mode(ext, output_image_path, img):
+def compress_mode(output_image_path, img):
     ext = os.path.splitext(output_image_path)[1].lower()
     if ext in ('.jpg', '.jpeg'):
         if img.mode in ('RGBA', 'LA'):
@@ -27,14 +27,16 @@ def compress_mode(ext, output_image_path, img):
     elif ext == '.png':
         while True:
             try:
-                compress_level = int(input("Elige el nivel de compresión (0-9): "))
+                compress_level = int(
+                    input("Elige el nivel de compresión (0-9): "))
                 if 0 <= compress_level <= 9:
                     break
                 else:
                     print("Por favor, ingresa un valor entre 0 y 9.")
             except ValueError:
                 print("Por favor, ingresa un número entero válido.")
-        img.save(output_image_path, "PNG", optimize=True, compress_level=compress_level)
+        img.save(output_image_path, "PNG", optimize=True,
+                 compress_level=compress_level)
     else:
         img.save(output_image_path)
 
